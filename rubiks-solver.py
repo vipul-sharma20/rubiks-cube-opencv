@@ -277,7 +277,7 @@ def extract(imageName, face):
 
 	#lower_orange = np.array([0, 130, 90],np.uint8)		# HSV color code lower and upper bounds
 	#upper_orange = np.array([20, 210, 170],np.uint8)		# color orange
-	lower_orange = np.array([5, 150, 200],np.uint8)		# HSV color code lower and upper bounds
+	lower_orange = np.array([5, 150, 150],np.uint8)		# HSV color code lower and upper bounds
 	upper_orange = np.array([15, 235, 250],np.uint8)		# color orange
 
 	frame_threshed2 = cv2.inRange(hsv_img, lower_orange, upper_orange)		# Thresholding image
@@ -353,7 +353,7 @@ def extract(imageName, face):
 	#lower_green = np.array([60, 120, 80],np.uint8)		# HSV color code lower and upper bounds
 	#upper_green = np.array([100, 170, 120],np.uint8)		# color orange
 	lower_green = np.array([60, 110, 110],np.uint8)		# HSV color code lower and upper bounds
-	upper_green = np.array([100, 170, 250],np.uint8)		# color orange
+	upper_green = np.array([100, 220, 250],np.uint8)		# color orange
 	
 
 	frame_threshed4 = cv2.inRange(hsv_img, lower_green, upper_green)		# Thresholding image
@@ -930,34 +930,210 @@ def solution(position):
 	t = open('in.dat', 'w')
 	t.write(pos.strip())
 	t.close()
-	os.system("python golf.py < in.dat > result.txt")
+	os.system("python solver.py < in.dat > result.txt")
 	t = open('result.txt', 'rb')
 	p = t.read()
 	#print p
-	p = p.replace('\n', '')
+	
+	#p = p.replace('\n', '')
+	print pos.strip()
 	print p
 	
 	do = ''
 	move = 0
 	while move < len(p):
-		do = p[move] + p[move+1]
+		do = do + p[move] + p[move+1] + ' '
 		move += 2
-		print do
+	#print do
 
-	change = {}
-	change['F']
+	
+	"""change = {}
+	change['F'] = {}
+	change['B'] = {}
+	change['R'] = {}
+	change['L'] = {}
+	change['U'] = {}
+	change['D'] = {}
+
 	change['F']['90'] = {}
-	change['F']['90'] = {}
+	#change['F']['90'] = {}
 	change['F']['90']['U'] = 'R'
 	change['F']['90']['R'] = 'D'
 	change['F']['90']['D'] = 'L'
 	change['F']['90']['L'] = 'U'
 
-	change['']	
+	change['F']['180'] = {}
+	change['F']['180']['U'] = 'D'
+	change['F']['180']['R'] = 'L'
+	change['F']['180']['D'] = 'U'
+	change['F']['180']['L'] = 'R'
 
+        change['F']['270'] = {} 
+        change['F']['270']['U'] = 'L'   
+        change['F']['270']['R'] = 'U'   
+        change['F']['270']['D'] = 'R'
+        change['F']['270']['L'] = 'D'
 
+        change['B']['180'] = {} 
+        change['B']['180']['U'] = 'D'   
+        change['B']['180']['R'] = 'L'   
+        change['B']['180']['D'] = 'U'
+        change['B']['180']['L'] = 'R'
+
+        change['B']['90'] = {}
+        change['B']['90']['U'] = 'L'
+        change['B']['90']['R'] = 'U'
+        change['B']['90']['D'] = 'R'
+        change['B']['90']['L'] = 'D'
+
+	change['B']['270'] = {}
+        change['B']['270']['U'] = 'R'
+        change['B']['270']['R'] = 'D'
+        change['B']['270']['D'] = 'L'
+        change['B']['270']['L'] = 'U'
+
+	change['U']['90'] = {}
+        change['U']['90']['F'] = 'L'
+        change['U']['90']['L'] = 'B'
+        change['U']['90']['B'] = 'R'
+        change['U']['90']['R'] = 'F'
+
+        change['U']['180'] = {}
+        change['U']['180']['F'] = 'B'
+        change['U']['180']['L'] = 'R'
+        change['U']['180']['B'] = 'F'
+        change['U']['180']['R'] = 'L'
+
+        change['U']['270'] = {}
+        change['U']['270']['F'] = 'R'
+        change['U']['270']['L'] = 'F'
+        change['U']['270']['B'] = 'L'
+        change['U']['270']['R'] = 'B'
+
+        change['D']['90'] = {}
+        change['D']['90']['F'] = 'R'
+        change['D']['90']['L'] = 'F'
+        change['D']['90']['B'] = 'L'
+        change['D']['90']['R'] = 'B'
+
+        change['D']['180'] = {}
+        change['D']['180']['F'] = 'B'
+        change['D']['180']['L'] = 'R'
+        change['D']['180']['B'] = 'F'
+        change['D']['180']['R'] = 'L'
+
+	change['D']['270'] = {}
+        change['D']['270']['F'] = 'L'
+        change['D']['270']['L'] = 'B'
+        change['D']['270']['B'] = 'R'
+        change['D']['270']['R'] = 'F'
+
+	change['R']['90'] = {}
+	change['R']['90']['U'] = 'B'
+	change['R']['90']['B'] = 'D'
+	change['R']['90']['D'] = 'F'
+	change['R']['90']['F'] = 'U'
+
+	change['R']['180'] = {}
+	change['R']['180']['U'] = 'D'
+	change['R']['180']['B'] = 'F'
+	change['R']['180']['D'] = 'U'
+	change['R']['180']['F'] = 'B'
+
+	change['R']['270'] = {}
+	change['R']['270']['U'] = 'F'
+	change['R']['270']['B'] = 'U'
+	change['R']['270']['D'] = 'B'
+	change['R']['270']['F'] = 'D'
+
+	change['L']['90'] = {}
+	change['L']['90']['U'] = 'F'
+        change['L']['90']['F'] = 'D'
+        change['L']['90']['D'] = 'B'
+        change['L']['90']['B'] = 'U'
+
+        change['L']['180'] = {}
+        change['L']['180']['U'] = 'D'
+        change['L']['180']['F'] = 'B'
+        change['L']['180']['D'] = 'U'
+        change['L']['180']['B'] = 'F'
+
+	change['L']['270'] = {}
+	change['L']['270']['U'] = 'B' 
+        change['L']['270']['F'] = 'U'
+        change['L']['270']['D'] = 'F'
+        change['L']['270']['B'] = 'D'
 	
+	print change
+	print do.split(' ')
+	rotation = pos.split(' ')
+	after = list(pos)
+	
+	face_front = [['U','F'], ['R','F'], ['D','F'], ['L','F'], ['U','L','F'], ['U','R','F'], ['D','R','F'], ['D','L','F']]	
+	face_right = [['U','R'], ['B','R'], ['D','R'], ['R','F'], ['U','R','F'], ['R','B','U'], ['D','R','B'], ['D','R','F']]
+	face_back =  [['U','B'], ['B','L'], ['B','D'], ['B','R'], ['U','R','B'], ['U','L','B'], ['B','D','L'], ['B','D','R']]
+	face_left =  [['L','U'], ['L','B'], ['L','D'], ['L','F'], ['L','B','U'], ['L','B','D'], ['L','F','U'], ['L','F','D']]
+	face_up   =  [['U','F'], ['U','R'], ['U','B'], ['U','L'], ['U','F','R'], ['U','F','L'], ['U','R','B'], ['U','L','B']]
+	face_down =  [['D','F'], ['D','R'], ['D','B'], ['D','L'], ['D','F','R'], ['D','R','B'], ['D','L','B'], ['D','L','F']]
+	
+	for elem in do.strip().split(' '):
+		if elem == '':
+			break
+		first = elem[0]
+		
+		second = ''
+		new_pos = {}
+		if elem[1] == '1':
+			second = '90'
+		elif elem[1] == 2:
+			second = '180'
+		elif elem[1] == '270':
+			second = '270'
+		else:
+			print 'something went wrong'
+		if first == 'L':
+			to_do = face_left
+		elif first == 'R':
+			to_do = face_right
+		elif first == 'F':
+			to_do = face_front
+		elif first == 'D':
+			to_do = face_down
+		elif first == 'U':
+			to_do = face_up
+		else: 
+			print 'something wen wrong'
 
+		for x,y in change[first][second].iteritems():
+			new_pos[x] = y
+		
+		print 'new pos: ',
+		print new_pos
+		count = 0
+		#print len(pos)
+		p_count = 0 
+		for p in rotation:
+			#print count
+			senti = False
+			for elem in to_do:
+				if set(elem) == set(list(p)):
+					senti = True
+			if senti:
+				for x in list(p):
+					if after[count] == ' ':
+						count += 1
+					if x in new_pos:
 
-
+						after[count] = str(new_pos[x])
+						count += 1
+			else:
+				for x in list(p):
+					if after[count] == ' ':
+						count += 1
+					else:
+						after[count] = x
+						count += 1
+			p_count += 1
+		print ''.join(after)"""
+								
 main()
