@@ -91,10 +91,10 @@ Locate the centroid in seperate grid boxes
 find colors attached to that cubie and form a graph 
 
 
-1> Get colors
-2> Locate every color
-3> Create graph of all colors
-4> Name all the nodes according to color groups 
+1. Get colors
+2. Locate every color
+3. Create graph of all colors
+4. Name all the nodes according to color groups 
 
 
                                      _________________________________________
