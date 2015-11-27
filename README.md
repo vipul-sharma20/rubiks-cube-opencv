@@ -82,13 +82,13 @@ Corner Pieces:
 42-43-44 = red-white-green
 45-46-47 = red-green-yellow
 
-Take image 
-Crop for cube
-Extract colors
-Create grids
-Take centroid of bounding box
-Locate the centroid in seperate grid boxes
-find colors attached to that cubie and form a graph 
+* Take image 
+* Crop for cube
+* Extract colors
+* Create grids
+* Take centroid of bounding box
+* Locate the centroid in seperate grid boxes
+* find colors attached to that cubie and form a graph 
 
 
 1. Get colors
